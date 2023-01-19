@@ -1,0 +1,86 @@
+SQL Exercises 
+Two tables to be created in the database that may be used for the following exercises. Their structure is as follows: 
+
+EMP(empno, ename, job, mgr-id, hiredate, sal, comm., deptno) 
+
+DEPT(deptno, dname, loc) 
+
+
+ These tables have the following data: 
+EMPNO   ENAME     JOB           MGR-Id     HIREDATE      SAL     COMM   DEPTNO 
+7369    SMITH     CLERK	        7902   	   17-DEC-80     800	         20
+7499    ALLEN     SALESMAN      7698   	   20-FEB-81     1600    300     30
+7521    WARD	  SALESMAN      7698       22-FEB-81  	 1250    500     30
+7566    JONES     MANAGER       7839   	   02-APR-81   	 2975            20
+7654    MARTIN    SALESMAN      7698   	   28-SEP-81  	 1250    1400    30
+7698	BLAKE     MANAGER 	7839 	   01-MAY-81     2850            30
+7782    CLARK     MANAGER       7839       09-JUN-81   	 2450            10
+7788    SCOTT     ANALYST       7566   	   19-APR-87     3000            20
+7839    KING      PRESIDENT            	   17-NOV-81     5000            10
+7844    TURNER    SALESMAN      7698       08-SEP-81     1500     0      30
+7876    ADAMS     CLERK         7788       23-MAY-87     1100            20
+7900    JAMES     CLERK         7698   	   03-DEC-81  	 950             30
+7902    FORD      ANALYST       7566   	   03-DEC-81   	 3000            20
+7934    MILLER    CLERK         7782       23-JAN-82	 1300            10
+
+
+DEPT 
+DEPTNO  DNAME        LOC 
+10     ACCOUNTING    NEW YORK 
+20     RESEARCH      DALLAS 
+30     SALES         CHICAGO 
+40     OPERATIONS    BOSTON 
+
+
+Write and execute the necessary SQL statements to perform the following tasks. 
+
+1. List all employees whose name begins with 'A'. 
+	select * from EMP like 'A%'
+2. Select all those employees who don't have a manager.
+	select * from EMP where MGR-Id is null
+3. List employee name, number and salary for those employees who earn in the range 1200 to 1400. 
+	select ENAME, EMPNO, SAL from EMP where SAL>=1200 and SAL<=1400
+4. Give all the employees in the RESEARCH department a 10% pay rise. Verify that this has been done by listing all their details before and after the rise. 
+	select d.dname, e.ename, e.sal
+	from EMP e inner join DEPT d
+	on e.deptno=d.deptno
+	where d.deptno=20
+
+	update emp set sal=sal+(sal*10/100) where deptno=20
+
+	select d.dname, e.ename, e.sal
+	from EMP e inner join DEPT d
+	on e.deptno=d.deptno
+	where d.deptno=20
+5. Find the number of CLERKS employed. Give it a descriptive heading. 
+	select COUNT(job) as 'TOTAL CLERK' from EMP where job='Clerk'
+6. Find the average salary for each job type and the number of people employed in each job. 
+	select job, AVG(sal) as 'AVG SALARY', COUNT(empno) as 'COUNT OF EMPLOYEE' from EMP group by job
+7. List the employees with the lowest and highest salary. 
+	select MIN(sal) as 'MIN SAL', MAX(sal) as 'MAX SAL' from emp
+8. List full details of departments that don't have any employees. 
+	select d.deptno, d.dname, d.loc, e.ename
+	from DEPT d LEFT OUTER JOIN EMP e
+	on d.deptno=e.deptno
+	where e.deptno IS NULL
+9. Get the names and salaries of all the analysts earning more than 1200 who are based in department 20. Sort the answer by ascending order of name. 
+	select ename,sal,job from EMP
+	where job='Analyst' AND deptno=20
+	group by ename, sal, job
+	having sal>=1200
+	order by ename ASC
+10. For each department, list its name and number together with the total salary paid to employees in that department. 
+	select d.dname, d.deptno, SUM(e.sal) as 'TOTAL SALARY'
+	from EMP e inner join DEPT d
+	on e.deptno=d.deptno
+	group by d.deptno,d.dname
+11. Find out salary of both MILLER and SMITH.
+	select ename, sal from EMP
+	where ename in('Smith', 'Miller')
+12. Find out the names of the employees whose name begin with ‘A’ or ‘M’. 
+	select * from EMP where ENAME like '[AM]%'
+13. Compute yearly salary of SMITH. 
+	select ename, 12*sal as 'Annual Salary' from EMP
+	where ename='Smith'
+14. List the name and salary for all employees whose salary is not in the range of 1500 and 2850.
+	select ENAME, SAL from EMP where SAL<1500 or SAL>2850
