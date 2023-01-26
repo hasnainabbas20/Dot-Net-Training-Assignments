@@ -1,0 +1,140 @@
+1 =>    
+    class EqualOrNot
+    {
+        public static void Main()
+        {
+            int a, b;
+            Console.Write("Input 1st Number: ");
+            a = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Input 2nd Number: ");
+            b = Convert.ToInt32(Console.ReadLine());
+            if (a == b)
+            {
+                Console.WriteLine("{0} and {1} are equal", a, b);
+            }
+            else
+            {
+                Console.WriteLine($"{a} and {b} are not equal");
+            }
+            Console.Read();
+        }
+    }
+
+2 =>
+    class PositiveOrNegative
+    {
+        public static void Main()
+        {
+            int a;
+            Console.WriteLine("Enter a number: ");
+            a = Convert.ToInt32(Console.ReadLine());
+            if (a >= 0)
+            {
+                Console.WriteLine($"{a} is a positive number");
+            }
+            else
+            {
+                Console.WriteLine(a + " is a negative number");
+            }
+            Console.ReadLine();
+        }
+    }
+
+3 =>
+    class Operation
+    {
+        public static void Main()
+        {
+            float a, b;
+            char c;
+            Console.Write("Input first number: ");
+            a = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Input operation: ");
+            c = Convert.ToChar(Console.ReadLine());
+            Console.Write("Input second number: ");
+            b = Convert.ToInt32(Console.ReadLine());
+            switch (c)
+            {
+                case '+':
+                    Console.WriteLine($"{a} + {b} = {a + b}");
+                    break;
+                case '-':
+                    Console.WriteLine($"{a} - {b} = {a - b}");
+                    break;
+                case '*':
+                    Console.WriteLine($"{a} * {b} = {a * b}");
+                    break;
+                case '/':
+                    Console.WriteLine($"{a} / {b} = {a / b}");
+                    break;
+                default:
+                    Console.WriteLine("Invalid Operation");
+                    break;
+            }
+            Console.Read();
+        }
+    }
+
+4(A) =>
+    class ArraysA
+    {
+        public static void Main()
+        {
+            int[] arr = new int[] {85,96,8,963,256};
+            int sum = 0;
+            float avg;
+            for(int i = 0; i < arr.Length; i++)
+            {
+                sum += arr[i];
+            }
+            avg = sum / arr.Length;
+            Console.WriteLine("Average of array: {0}",avg);
+            int min = int.MaxValue, max = int.MinValue;
+            for(int i = 0; i < arr.Length; i++)
+            {
+                if(min > arr[i])
+                {
+                    min = arr[i];
+                }
+                if(max < arr[i])
+                {
+                    max = arr[i];
+                }
+            }
+            Console.WriteLine("Minimum Value: " + min);
+            Console.WriteLine("Maximum Value: " + max);
+            Console.Read();
+        }
+    }
+
+4(B) =>
+    class ArraysB
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = new int[10];
+            Console.WriteLine("Enter Marks: ");
+            for (int i = 0; i < 10; i++)
+            {
+                arr[i] = Convert.ToInt32(Console.ReadLine());
+            }
+            Console.WriteLine("Total Marks: " + arr.Sum());
+            Console.WriteLine("Average Marks: " + arr.Average());
+            Console.WriteLine("Minimum Marks: " + arr.Min());
+            Console.WriteLine("Maximum Marks: " + arr.Max());
+            Array.Sort(arr);
+            Console.Write("Marks in Ascending Order: ");
+            foreach (int i in arr)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine();
+            Array.Reverse(arr);
+            Console.Write("Marks in Descending Order: ");
+            foreach (int i in arr)
+            {
+                Console.Write(i + " ");
+            }
+            Console.Read();
+        }
+    }
