@@ -1,0 +1,171 @@
+1 => 
+    class Uppercase
+    {
+        public static void Display(string fname, string lname)
+        {
+            Console.WriteLine("\n----UPPERCASE----\n");
+            Console.WriteLine("FIRST NAME: {0}",fname.ToUpper());
+            Console.WriteLine($"LAST NAME: {lname.ToUpper()}");
+        }
+        static void Main(string[] args)
+        {
+            string firstName, lastName;
+            Console.Write("Enter First Name: ");
+            firstName = Console.ReadLine();
+            Console.Write("Enter Last Name: ");
+            lastName = Console.ReadLine();
+            Display(firstName, lastName);
+            Console.Read();
+        }
+    }
+
+2 =>
+    class CountOccurences
+    {
+        public static void CharCount(string str, char c)
+        {
+            int count = 0;
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == c)
+                {
+                    count++;
+                }
+            }
+            Console.WriteLine($"\nThe count of character {c}: {count}");
+        }
+
+        public static void Main()
+        {
+            string word;
+            char ch;
+            Console.Write("Enter a string: ");
+            word = Console.ReadLine();
+            Console.Write("Enter the character to be counted: ");
+            ch = char.Parse(Console.ReadLine());
+            CharCount(word,ch);
+            Console.Read();
+        }
+    }
+
+3 =>
+    class SaleDetails
+    {
+        public int SalesNo, ProductNo, Qty;
+        public float Price, TotalAmount;
+        public DateTime DateofSale;
+
+        public SaleDetails(int SalesNo,int ProductNo,int Qty,float Price,DateTime DateofSale)
+        {
+            this.SalesNo = SalesNo;
+            this.ProductNo = ProductNo;
+            this.Qty = Qty;
+            this.Price = Price;
+            this.DateofSale = DateofSale;
+        }
+
+        public void Sales(int qty, float price)
+        {
+            TotalAmount = qty * price;
+        }
+
+        public void ShowData()
+        {
+            Console.WriteLine($"Sales Number: {SalesNo}");
+            Console.WriteLine("Product Number: {0}",ProductNo);
+            Console.WriteLine("Date of Sale: " + DateofSale);
+            Console.WriteLine("Price: {0}",Price);
+            Console.WriteLine($"Quantity: {Qty}");
+            Console.WriteLine("Total Amount: " + TotalAmount);
+        }
+    }
+
+    class Program
+    {
+        public static void Main()
+        {
+            SaleDetails s = new SaleDetails(1, 110, 12, 98.75f, DateTime.Now);
+            s.Sales(s.Qty, s.Price);
+            s.ShowData();
+            Console.Read();
+        }
+    }
+
+4 =>
+    class Scholarship
+    {
+        public int TotalMarks;
+        public float fees;
+
+        public float Merit(int m, float f)
+        {
+            if(m >= 70 && m <= 80)
+            {
+                return f * 0.2f;
+            }
+            else if(m > 80 && m <= 90)
+            {
+                return f * 0.3f;
+            }
+            else if (m > 90)
+            {
+                return f * 0.5f;
+            }
+            else
+            {
+                return 0f;
+            }
+        }
+
+        public static void Main()
+        {
+            Scholarship scholar = new Scholarship();
+            Console.Write("Enter the total marks: ");
+            scholar.TotalMarks = int.Parse(Console.ReadLine());
+            Console.Write("Enter the annual fee: ");
+            scholar.fees = float.Parse(Console.ReadLine());
+            Console.WriteLine("The Scholarship Amount will be: " + scholar.Merit(scholar.TotalMarks, scholar.fees));
+            Console.Read();
+        }
+    }
+
+5 =>
+    class Doctor
+    {
+        int RegnNo;
+        string Name;
+        float Feescharged;
+
+        public int rno
+        {
+            get { return RegnNo; }
+            set { RegnNo = value; }
+        }
+        public string name
+        {
+            get { return Name; }
+            set { Name = value; }
+        }
+        public float fees
+        {
+            get { return Feescharged; }
+            set { Feescharged = value; }
+        }
+
+        public void Display()
+        {
+            Console.WriteLine("Registration Number: " + RegnNo);
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine("Fees Charged: {0}",Feescharged);
+        }
+
+        public static void Main()
+        {
+            Doctor doc = new Doctor();
+            doc.rno = 1010;
+            doc.name = "Rahul";
+            doc.fees = 45000;
+            doc.Display();
+            Console.Read();
+        }
+    }
