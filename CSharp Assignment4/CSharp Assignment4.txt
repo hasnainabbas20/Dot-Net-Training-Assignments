@@ -1,0 +1,214 @@
+1 =>
+    abstract class Student
+    {
+        public string Name, StudentID;
+        public double Grade;
+
+        public abstract bool Ispassed(double grd);
+    }
+
+    class UnderGraduate : Student
+    {
+        public override bool Ispassed(double grd)
+        {
+            if(grd > 70.0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    class Graduate : Student
+    {
+        public override bool Ispassed(double grd)
+        {
+            if(grd > 80.0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
+    class AbstractMain
+    {
+        static void Main()
+        {
+            Console.WriteLine("Enter Student Details:");
+            Console.Write("U for UnderGraduation/G for Graduation: "); string stype = Console.ReadLine();
+            Console.Write("Name: "); string sname = Console.ReadLine();
+            Console.Write("ID: "); string sid = Console.ReadLine();
+            Console.Write("Grade: "); double sgrade = double.Parse(Console.ReadLine());
+
+            Student s;
+            if (stype.ToUpper() == "U")
+            {
+                s = new UnderGraduate();
+            }
+            else
+            {
+                s = new Graduate();
+            }
+
+            s.Name = sname;
+            s.StudentID = sid;
+            s.Grade = sgrade;
+            Console.WriteLine("\n------------------------------\n");
+            if (s.Ispassed(sgrade))
+            {
+                Console.WriteLine("Result: Passed");
+            }
+            else
+            {
+                Console.WriteLine("Result: Failed");
+            }
+            Console.ReadLine();
+        }
+    }
+
+2 =>
+    class TicketException : ApplicationException
+    {
+        public TicketException(string message) : base(message)
+        {
+
+        }
+    }
+
+    class Passenger
+    {
+        public string Name;
+        public int Age;
+
+        public void TicketBooking(int no_of_tickets)
+        {
+            if(no_of_tickets > 2)
+            {
+                throw (new TicketException("cannot book more than 2 tickets"));
+            }
+            else
+            {
+                Console.WriteLine("Ticket Booked Successfully");
+            }
+        }
+    }
+
+    class Test
+    {
+        static void Main()
+        {
+            Passenger passenger = new Passenger();
+            Console.Write("Enter Name: "); passenger.Name = Console.ReadLine();
+            Console.Write("Enter Age: "); passenger.Age = int.Parse(Console.ReadLine());
+            Console.Write("Enter number of tickets to be booked: "); int numberoftickets = int.Parse(Console.ReadLine());
+            try
+            {
+                passenger.TicketBooking(numberoftickets);
+            }
+            catch(TicketException te)
+            {
+                Console.WriteLine(te.Message);
+            }
+            Console.Read();
+        }
+    }
+
+3 =>
+I =>
+    public class Fare
+    {
+        const double TotalFare = 500;
+        public void CalculateConsession(int age)
+        {
+            if (age < 5)
+            {
+                Console.WriteLine("Little Champs- Free Ticket");
+            }
+            else if(age > 60)
+            {
+                double consession = TotalFare * 0.3d;
+                double fare = TotalFare - consession;
+                Console.WriteLine($"Senior Citizen: {fare}");
+            }
+            else
+            {
+                Console.WriteLine("Ticket Booked: " + TotalFare);
+            }
+        }
+    }
+
+II =>
+using Concession
+    class Program
+    {
+        string Name;
+        int Age;
+        static void Main()
+        {
+            Program p = new Program();
+            Fare f = new Fare();
+            Console.Write("Enter Name: "); p.Name = Console.ReadLine();
+            Console.Write("Enter Age: "); p.Age = int.Parse(Console.ReadLine());
+            f.CalculateConsession(p.Age);
+            Console.Read();
+        }
+    }
+
+4 =>
+    interface IStudent
+    {
+        int StudentID { get; set; }
+        string Name { get; set; }
+        void ShowDetails();
+    }
+
+    class DayScholar : IStudent
+    {
+        public int StudentID { get; set; }
+        public string Name { get; set; }
+
+        public void ShowDetails()
+        {
+            Console.WriteLine($"Student ID: {StudentID}");
+            Console.WriteLine("Student Name: " + Name);
+            Console.WriteLine("Student is a Day Scholar");
+            Console.WriteLine();
+        }
+    }
+
+    class Resident : IStudent
+    {
+        public int StudentID { get; set; }
+        public string Name { get; set; }
+
+        public void ShowDetails()
+        {
+            Console.WriteLine("Student ID: {0}", StudentID);
+            Console.WriteLine($"Student Name: {Name}");
+            Console.WriteLine("Student is a Resident");
+            Console.WriteLine();
+        }
+    }
+
+    class Interface
+    {
+        public static void Main()
+        {
+            DayScholar ds = new DayScholar();
+            ds.StudentID = 2001;
+            ds.Name = "Hasnain";
+            ds.ShowDetails();
+            Resident rs = new Resident();
+            rs.StudentID = 2002;
+            rs.Name = "Abbas";
+            rs.ShowDetails();
+            Console.Read();
+        }
+    }

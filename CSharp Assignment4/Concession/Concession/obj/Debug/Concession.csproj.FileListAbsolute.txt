@@ -1,0 +1,10 @@
+D:\C#\Concession\Concession\bin\Debug\Concession.dll
+D:\C#\Concession\Concession\bin\Debug\Concession.pdb
+D:\C#\Concession\Concession\obj\Debug\Concession.csproj.AssemblyReference.cache
+D:\C#\Concession\Concession\obj\Debug\Concession.csproj.CoreCompileInputs.cache
+D:\C#\Concession\Concession\obj\Debug\Concession.dll
+D:\C#\Concession\Concession\obj\Debug\Concession.pdb
+D:\C#\Concession\Concession\bin\Debug\Assignment4.exe
+D:\C#\Concession\Concession\bin\Debug\Assignment4.pdb
+D:\C#\Concession\Concession\bin\Debug\Assignment4.exe.config
+D:\C#\Concession\Concession\obj\Debug\Concession.csproj.CopyComplete
