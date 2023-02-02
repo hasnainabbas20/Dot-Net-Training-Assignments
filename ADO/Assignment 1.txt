@@ -1,0 +1,163 @@
+1 =>
+create table Code_Employee
+(empno int primary key,
+ empname varchar(35) not null,
+ empsal numeric(10,2) check (empsal >=25000),
+ emptype char(1) check (emptype in ('F','P')))
+
+insert into Code_Employee values
+(11, 'Adam', 25000, 'P'),
+(12, 'Smith', 28000, 'F'),
+(13, 'Steve', 25500, 'P'),
+(14, 'Joseph', 28400, 'P'),
+(15, 'Gwen', 30000, 'P')
+
+2 =>
+create or alter proc AddEmpRecords(@eno int,@ename varchar(35),@esal numeric(10,2),@etype char(1))
+as
+begin
+	insert into Code_Employee values(@eno, @ename, @esal, @etype)
+end
+
+exec AddEmpRecords 16, 'Daisy', 26000, 'F'
+
+3 =>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Assignment1
+{
+    class Program
+    {
+        public static SqlConnection connect;
+        public static SqlCommand command;
+        public static SqlDataReader sqldr;
+
+        static SqlConnection GetConnect()
+        {
+            connect = new SqlConnection("data source=DESKTOP-OJG6C99\\SQLEXPRESS; Initial Catalog=Medusind_DB;" + "Integrated Security=true;");
+            connect.Open();
+            return connect;
+        }
+
+        static void Procedure()
+        {
+            connect = GetConnect();
+            Console.WriteLine("Insert Employee Data");
+            Console.Write("Enter Employee Number: "); int empno = int.Parse(Console.ReadLine());
+            Console.Write("Enter Employee Name: "); string empname = Console.ReadLine();
+            Console.Write("Enter Employee Salary: "); double empsal = double.Parse(Console.ReadLine());
+            Console.Write("Enter Employee Type [P (Parttime)/F (Fulltime)]: "); char emptype = char.Parse(Console.ReadLine());
+            command = new SqlCommand("AddEmpRecords", connect);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@eno", empno);
+            command.Parameters.AddWithValue("@ename", empname);
+            command.Parameters.AddWithValue("@esal", empsal);
+            command.Parameters.AddWithValue("@etype", emptype);
+            int nor = command.ExecuteNonQuery();
+            if (nor > 0)
+            {
+                Console.WriteLine("\nRecord Inserted Succesfully");
+            }
+            else
+            {
+                Console.WriteLine("\nSome Error Occurred!!");
+            }
+        }
+
+        static void Main()
+        {
+            Procedure();
+            Console.Read();
+        }
+    }
+}
+
+4 =>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Assignment1
+{
+    class Program
+    {
+        public static SqlConnection connect;
+        public static SqlCommand command;
+        public static SqlDataReader sqldr;
+
+        static SqlConnection GetConnect()
+        {
+            connect = new SqlConnection("data source=DESKTOP-OJG6C99\\SQLEXPRESS; Initial Catalog=Medusind_DB;" + "Integrated Security=true;");
+            connect.Open();
+            return connect;
+        }
+
+        static void Procedure()
+        {
+            connect = GetConnect();
+            Console.WriteLine("Insert Employee Data");
+            Console.Write("Enter Employee Number: "); int empno = int.Parse(Console.ReadLine());
+            Console.Write("Enter Employee Name: "); string empname = Console.ReadLine();
+            Console.Write("Enter Employee Salary: "); double empsal = double.Parse(Console.ReadLine());
+            Console.Write("Enter Employee Type [P (Parttime)/F (Fulltime)]: "); char emptype = char.Parse(Console.ReadLine());
+            command = new SqlCommand("AddEmpRecords", connect);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@eno", empno);
+            command.Parameters.AddWithValue("@ename", empname);
+            command.Parameters.AddWithValue("@esal", empsal);
+            command.Parameters.AddWithValue("@etype", emptype);
+            int nor = command.ExecuteNonQuery();
+            if (nor > 0)
+            {
+                Console.WriteLine("\nRecord Inserted Succesfully");
+            }
+            else
+            {
+                Console.WriteLine("\nSome Error Occurred!!");
+            }
+        }
+
+        static void DisplayRecords()
+        {
+            Console.WriteLine("\n-----------------------------------\n");
+            try
+            {
+                connect = GetConnect();
+                string query = "Select * from Code_Employee";
+                command = new SqlCommand(query, connect);
+                sqldr = command.ExecuteReader();
+                while (sqldr.Read())
+                {
+                    Console.WriteLine(sqldr["empno"] + "  " + sqldr["empname"] + "  " + sqldr["empsal"] + "  " + sqldr["emptype"]);
+                }
+            }
+            catch (SqlException se)
+            {
+                Console.WriteLine(se.Message);
+            }
+            finally
+            {
+                connect.Close();
+            }
+        }
+
+        static void Main()
+        {
+            Procedure();
+            DisplayRecords();
+            Console.Read();
+        }
+    }
+}
