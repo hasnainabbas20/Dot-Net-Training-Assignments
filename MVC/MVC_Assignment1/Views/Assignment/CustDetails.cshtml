@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MVC_Assignment1.Models.Order>
+@{
+    ViewBag.Title = "CustDetails";
+}
+
+<h2>Customer Details</h2>
+<br />
+
+@foreach(var item in Model)
+            {
+                <ul>
+                    <li>Order ID: @item.OrderID</li>
+                    <li>Customer ID: @item.CustomerID</li>
+                    <li>Employee ID: @item.EmployeeID</li>
+                    <li>Order Date: @item.OrderDate</li>
+                    <li>Required Date: @item.RequiredDate</li>
+                    <li>Shipped Date: @item.ShippedDate</li>
+                    <li>Ship Via: @item.ShipVia</li>
+                    <li>Freight: @item.Freight</li>
+                    <li>Ship Name: @item.ShipName</li>
+                    <li>Ship Address: @item.ShipAddress</li>
+                    <li>Ship City: @item.ShipCity</li>
+                    <li>Ship Region: @item.ShipRegion</li>
+                    <li>Ship Postal Code: @item.ShipPostalCode</li>
+                    <li>Ship Country: @item.ShipCountry</li>
+                </ul>
+            }

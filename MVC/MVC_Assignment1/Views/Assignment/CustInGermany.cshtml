@@ -1,0 +1,12 @@
+﻿@model IEnumerable<MVC_Assignment1.Models.Cust_Germany_Result>
+@{
+    ViewBag.Title = "CustInGermany";
+}
+
+<h2>List of Customers in Germany:</h2>
+<br />
+
+@foreach(var item in Model)
+            {
+                <li>@item.ContactName</li>
+            }
