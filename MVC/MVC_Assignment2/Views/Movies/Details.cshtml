@@ -1,0 +1,33 @@
+﻿@model MVC_Assignment2.Models.Movies
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Movie Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Moviename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Moviename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateofRelease)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateofRelease)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Mid }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+</p>
